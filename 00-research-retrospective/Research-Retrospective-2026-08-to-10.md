@@ -1,49 +1,58 @@
 # AI Agent Security & Assurance — Research Retrospective / 研究复盘
 
 **Updated:** 2026-10-13  
-**Evidence status:** Reconstructed from available prior-conversation context and the GitHub Hermes baseline; shared-chat URL was not accessible for full-text verification. This is **not** a verbatim transcript.
+**Evidence status:** reconstructed from the repository's historical Hermes baseline and limited prior-conversation context. Private conversation links and operational identifiers are excluded. This is **not** a verbatim or exhaustive transcript.
 
 ## Executive summary / 核心结论
-The research moved from general AI security learning toward a practical **AI Agent Assurance** portfolio: use Nous Research Hermes as a concrete assessment object, build an inventory and threat model, derive tests from OWASP-aligned scenarios, map enterprise safeguards, and produce a defensible assurance report.
 
-### Historical project pipeline (recovered)
-`Agent Inventory → Threat Model → OWASP Test Matrix → Enterprise Control Mapping → Assurance Report`
+The research evolved from general AI security learning toward a practical **AI Agent Assurance** portfolio: assess an agent as a system with tools and side effects, build an inventory and threat model, derive authorized tests, map controls to evidence, and produce a qualified assurance report.
 
-### Deliverables identified in original discussions
+### Recovered assessment pipeline
+
+`Agent Inventory → Threat Model → Test Matrix → Enterprise Control Mapping → Assurance Report`
+
+### Deliverables identified
+
 1. AI governance and risk framework
-2. AI Agent risk register
-3. Agent system and data-flow threat model
-4. Red-team/evaluation playbook (authorized lab)
+2. AI agent risk register
+3. System and data-flow threat model
+4. Authorized red-team/evaluation playbook
 5. Reproducible evaluation pipeline
-6. GxP / regulated-systems extension
-7. Hermes security baseline and evidence pack
+6. Regulated-systems extension
+7. Sanitized security baseline and evidence pack
 
-## Dated discussion chronology
-| Date | Research thread | Key contribution | Evidence quality |
+## Research chronology
+
+| Period | Research thread | Contribution | Evidence quality |
 |---|---|---|---|
-| 2026-08-04 | Career and research direction | Concentration on AI Evaluation, Red Team, Governance, AI Assurance; Hermes as assessment object; roadmap | Recovered conversation summary |
-| 2026-08-09 | Hermes security baseline v0.5 | Capability inventory, channel/STT remediation and runtime observations | Existing GitHub baseline |
-| 2026-09-12 | Threat intel + Agent Assurance | Distinguish telemetry vs inference vs attribution; shift from input/output risk to agent actions and tool policy | Recovered conversation summary |
-| 2026-09/10 | Academic evaluation discussions | RLHF, evaluator disagreement, benchmark gaming, AI cheat, world models, false positive/negative cost | Conversation summaries; source papers to verify |
-| 2026-10-13 | Consolidation | Seven domain folders and initial domain README files | GitHub commit 694ed03 |
+| 2026-08 | Direction and baseline | AI Assurance focus; agent system selected as an assessment object; initial capability and runtime notes | Historical repository artifact and summarized context |
+| 2026-09 | Threat intelligence | Separate platform observation, inference, attribution and confirmed impact | Discussion summary; sources require verification |
+| 2026-09 to 2026-10 | Evaluation | Human-evaluator disagreement, false-positive/negative cost, benchmark gaming and independent revalidation | Discussion summary; primary literature requires verification |
+| 2026-10 | Consolidation | Research domains, threat model, permission matrix and assurance framework | Current repository artifacts |
 
-## What early summary missed / 上一版遗漏
-- The **end-to-end assessment methodology**, not only independent topic labels.
-- Specific distinctions: enforced permissions vs policy statements; runtime success vs safe action execution; human approval vs fully autonomous side effects.
-- Baseline historical **disabled/enabled capability matrix**, plus versioning and evidence provenance.
-- Explicit outcomes: permission matrix, threat model, test suite, control crosswalk, evidence pack, assurance report and GxP validation adaptation.
-- The impact of platform-observed versus inferred intelligence, and why actor attribution remains uncertain.
-- Separation of **AI safety evaluation**, **cybersecurity assessment**, and **regulated assurance**, which share evidence discipline but not identical requirements.
+## Key lessons
+
+- Agent risk is not limited to model output; it includes tools, identities, files, memory, external systems and side effects.
+- Policy text and model refusal are weaker evidence than controls enforced by an independent boundary.
+- A completed model inference does not prove end-to-end response delivery or safe action execution.
+- Human approval should be tied to consequential operations and backed by technical enforcement and audit evidence.
+- Threat intelligence must separate direct observation from inference, attribution and verified real-world impact.
+- AI safety evaluation, cybersecurity assessment and regulated assurance share evidence discipline but have different acceptance criteria.
+- Public documentation should retain methods and lessons while omitting credentials, exact infrastructure and private operational history.
 
 ## Research maturity
-**Available:** historical baseline and operational notes; threat categories; assessment flow; standards shortlist; evaluation topics.
-**Not demonstrated:** current runtime verification, comprehensive technical threat model, completed executable OWASP test matrix, clause-by-clause standards mapping, independently reproduced attacks/defenses, external peer review, certification or GxP validation.
 
-## Evidence labels used throughout the repository
-- **[OBSERVED-HISTORICAL]:** described in a dated prior operational artifact, not freshly verified.
-- **[DISCUSSION]:** ideas or conclusions recorded in earlier conversations.
-- **[DESIGN]:** proposed engineering design or method.
-- **[TODO-VERIFY]:** external reference, statement or implementation awaits source checking.
+**Available:** historical sanitized baseline; threat categories; assessment workflow; draft permission matrix; assurance claim structure; reusable test and evidence templates.
 
-## Share link
-Original shared conversation supplied by repository owner: https://chatgpt.com/share/6ace317a-7b98-83ea-9941-139878317d40 . Automated access to full shared content was unavailable on 2026-10-13. Follow-up comparison should reconcile exact quotations, dates and any additional decisions before labeling this retrospective exhaustive.
+**Not demonstrated:** current runtime verification; completed executable test suite; independently reproduced attacks or defenses; verified clause-by-clause standards mapping; external peer review; certification; regulated-process validation.
+
+## Evidence labels
+
+- **[OBSERVED-HISTORICAL]:** recorded in a dated artifact but not freshly verified.
+- **[DISCUSSION]:** conclusion summarized from earlier conversation.
+- **[DESIGN]:** proposed method, control or test.
+- **[TODO-VERIFY]:** source, implementation or result still requires validation.
+
+## Publication boundary
+
+No private conversation URL is used as evidence in this public archive. Future additions should cite public primary sources where possible and follow [PUBLICATION-SAFETY.md](../PUBLICATION-SAFETY.md). Operational evidence should be retained privately and represented here only through reviewed, synthetic or redacted artifacts.
