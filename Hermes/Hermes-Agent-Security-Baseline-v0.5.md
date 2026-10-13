@@ -1,400 +1,99 @@
-\# Hermes Agent Security Baseline v0.5
+# Hermes Agent Security Baseline v0.5
 
+> Sanitized public edition of a historical 2026-08-09 baseline. Exact infrastructure, service identifiers and private configuration are intentionally omitted. Statuses below were recorded at that time and have not been independently revalidated.
 
+## 1. Purpose
 
-\## 1. Project Overview
+Establish a security baseline for an autonomous agent deployment and evaluate:
 
+- agent security posture;
+- configuration management;
+- capability control;
+- runtime behavior;
+- security hardening practices.
 
+## 2. Sanitized environment
 
-Project:
+| Element | Public description |
+|---|---|
+| Runtime | Isolated Linux-based environment |
+| Agent | Hermes-style agent runtime |
+| Model access | External model service through an approved provider configuration |
+| Storage | Dedicated application and data areas; exact paths withheld |
+| Interfaces | Gateway plus local operator interfaces |
 
-AI-Security-Lab
+No credentials, endpoint URLs, hostnames, account identifiers or full configuration files are included.
 
+## 3. Historical deployment findings
 
+### HERMES-CONFIG-001 — residual channel configuration
 
-Component:
+**Symptom:** after an upgrade, the gateway did not start normally.
 
-Nous Research Hermes Agent
+**Recorded cause:** configuration for an unused messaging channel remained active.
 
+**Recorded remediation:** unused channel configuration was disabled or removed.
 
+**Historical status:** resolved. Current configuration still requires verification.
 
-Purpose:
+### HERMES-RUNTIME-001 — response delivery inconsistency
 
+**Symptom:** operator interfaces appeared to remain busy while session history contained a completed assistant response.
 
+**Recorded conclusion:** model inference completed; investigation shifted to the response delivery/rendering path.
 
-Establish a secure baseline for an autonomous AI Agent deployment and evaluate:
+**Historical status:** monitoring. This observation did not establish a security impact by itself.
 
-\- Agent security posture
+### HERMES-CONFIG-002 — unused speech capability
 
-\- Configuration management
+**Finding:** speech-to-text was enabled while its local dependency was unavailable.
 
-\- Capability control
+**Risk:** unnecessary dependency, runtime complexity and package supply-chain exposure.
 
-\- Runtime behavior
+**Recorded remediation:** speech-to-text was disabled because it was not required.
 
-\- Security hardening practices
+**Historical status:** resolved. Current configuration still requires verification.
 
+## 4. Historical capability snapshot
 
+| Capability group | Historical status |
+|---|---|
+| Model inference, agent runtime, gateway, local operator interfaces | Enabled |
+| Terminal and file tools | Enabled; permission depth not established by this baseline |
+| Unused messaging channel, speech features, browser, external tool protocol and outbound messaging | Disabled |
 
+This table is a dated observation, not proof of present-day configuration or effective containment.
 
+## 5. Principles applied
 
-\---
+- **Least privilege:** enable only required capabilities.
+- **Configuration hygiene:** remove or disable unused integrations.
+- **Secure defaults:** external channels remain off until reviewed and authorized.
+- **Capability control:** review tool scope, identities and approval requirements before activation.
+- **Evidence discipline:** distinguish observed behavior from enforced security controls.
 
+## 6. Findings register
 
+| ID | Finding | Historical severity | Historical status | Required revalidation |
+|---|---|---:|---|---|
+| HERMES-CONFIG-001 | Residual unused-channel configuration | Medium | Resolved | Current channel inventory and startup test |
+| HERMES-CONFIG-002 | Unused speech capability and missing dependency | Low | Resolved | Current capability and dependency inventory |
+| HERMES-RUNTIME-001 | Response delivery/rendering inconsistency | Low | Monitoring | Correlated end-to-end event trace |
 
-\# 2. Environment
+## 7. Hardening backlog
 
+1. Produce a versioned asset and capability inventory.
+2. Define a tool permission and approval matrix.
+3. Verify terminal, filesystem, identity and network boundaries.
+4. Test prompt/tool separation with synthetic data in an isolated lab.
+5. Evaluate memory and retrieval provenance before enabling persistence.
+6. Review integrations and dependencies for supply-chain risk.
+7. Retain redacted evidence and rerun regression tests after changes.
 
+## 8. Evidence limitation
 
-\## Platform
+A successful model response does not prove that tool authorization, data boundaries, logging or containment work. Each claim should follow:
 
+`Threat → Control → Evidence → Test → Residual Risk`
 
-
-Operating System:
-
-Linux Container Environment
-
-
-
-Deployment Path:
-
-/opt/Hermes
-
-
-
-
-
-Data Path:
-
-/opt/data
-
-
-
-
-
-
-
-\## Model Configuration
-
-
-
-LLM:
-
-kimi-k3
-
-
-
-
-
-Provider:
-
-kimi-coding-cn
-
-
-
-
-
-API Endpoint:
-
-https://api.moonshot.cn/v1
-
-
-
-
-
-
-
-\---
-
-
-
-\# 3. Initial Deployment Findings
-
-
-
-\## 3.1 Gateway Startup Failure
-
-
-
-\### Symptom
-
-
-
-After Hermes upgrade, Gateway failed to start.
-
-
-
-
-
-\### Root Cause
-
-
-
-Legacy WeChat channel configuration remained active.
-
-
-
-Configuration source:
-
-Status:
-
-
-
-Resolved
-
-
-
-
-
-\---
-
-
-
-\# 4. Agent Runtime Investigation
-
-
-
-\## Symptom
-
-
-
-User interaction did not receive immediate response.
-
-
-
-Observed:
-
-
-
-\- Dashboard chat appeared stuck
-
-\- TUI appeared processing
-
-\- Session history contained assistant responses
-
-
-
-
-
-\## Investigation Result
-
-
-
-LLM inference completed successfully.
-
-
-
-
-
-Evidence:
-
-
-
-Turn ended:
-
-reason=text\_response(finish\_reason=stop)
-
-
-
-
-
-Conclusion:
-
-
-
-Agent runtime and model inference were healthy.
-
-
-
-Issue was related to response delivery/rendering path.
-
-
-
-
-
-\---
-
-
-
-\# 5. STT / Voice Capability Hardening
-
-
-
-
-
-\## Finding
-
-
-
-Voice and Speech-To-Text capability was enabled but dependencies were unavailable.
-
-
-
-
-
-Configuration before:
-
-
-
-
-
-```yaml
-
-stt:
-
-&#x20; enabled: true
-
-&#x20; provider: local
-
-Runtime error:
-
-Lazy-installing faster-whisper failed
-
-
-
-STT provider 'local' configured but unavailable
-
-Risk
-
-Unnecessary capability increased:
-
-Dependency attack surface
-
-Runtime complexity
-
-Package supply-chain risk
-
-Remediation
-
-Configuration changed to:
-
-stt:
-
-&#x20; enabled: false
-
-&#x20; provider: local
-
-Status:
-
-Resolved
-
-6\. Current Capability Baseline
-
-Enabled
-
-Capability	Status
-
-LLM inference	Enabled
-
-Agent Runtime	Enabled
-
-Gateway	Enabled
-
-Dashboard	Enabled
-
-TUI	Enabled
-
-Terminal Tool	Enabled
-
-File Tool	Enabled
-
-
-
-
-
-Disabled
-
-Capability	Status
-
-WeChat Channel	Disabled
-
-STT	Disabled
-
-Wake Word	Disabled
-
-Browser	Disabled
-
-MCP	Disabled
-
-External Messaging	Disabled
-
-
-
-
-
-7\. Security Principles Applied
-
-Least Privilege
-
-Only required capabilities are enabled.
-
-Configuration Hygiene
-
-Unused integrations are disabled.
-
-Secure Default
-
-External channels are not enabled unless explicitly required.
-
-Capability Control
-
-Agent tools are reviewed before activation.
-
-8\. Security Findings Register
-
-ID	Finding	Severity	Status
-
-HERMES-CONFIG-001	Residual WeChat configuration	Medium	Resolved
-
-HERMES-CONFIG-002	STT enabled without dependencies	Low	Resolved
-
-HERMES-RUNTIME-001	Response rendering issue investigation	Low	Monitoring
-
-
-
-
-
-9\. Future Hardening Roadmap
-
-Phase 1
-
-Completed:
-
-Secure deployment baseline
-
-Channel review
-
-Capability reduction
-
-Phase 2
-
-Planned:
-
-Tool permission matrix
-
-Terminal security assessment
-
-Memory security testing
-
-Prompt injection testing
-
-MCP security evaluation
-
-Agent threat modeling
-
-Version History
-
-v0.5
-
-Date:
-
-2026-08-09
-
-Changes:
-
-Initial Hermes security baseline
-
-Gateway recovery documentation
-
-Configuration hardening record
-
+See [Hermes historical findings and verification backlog](../06-hermes-lab/Hermes-Historical-Findings-and-Verification.md) for the current public follow-up.
